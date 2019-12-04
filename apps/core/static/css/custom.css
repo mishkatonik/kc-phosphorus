@@ -1,8 +1,8 @@
 /* Custom CSS goes here */
 
-.navbar {
+/* .navbar {
     background: linear-gradient(135deg, #f2f9fe 0%, #d6f0fd 100%);
-}
+} */
 
 .card-user {
     max-width: 80px;
@@ -35,8 +35,35 @@ input[type=text]:focus {
   width: 100%;
 }
 
-/* Form */
-form { display: flex;
-       justify-content: center;
+.input-position-adjust {
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
+/* Form */
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 56px);
+}
+/* Background Image */
+body, html {
+    height: 100%;
+  }
+  
+  body {
+    /* The image used */
+    background-image: url('/static/images/sun.jpg');
+  
+    /* Full height */
+    height: 100%;
+  
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
