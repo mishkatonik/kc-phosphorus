@@ -18,11 +18,30 @@
 
 <!-- <p>Get an alert 30 minutes prior to the sunrise/sunset near you</p> -->
 
-<form>
+<header>
+    <div class="overlay"></div>
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+      <source src="/static/videos/landscape.mp4" type="video/mp4">
+    </video>
+    <div class="container h-100">
+      <div class="d-flex h-100 text-center align-items-center">
+        <div class="w-100 text-white">
+          <!-- <h1 class="display-3">Video Header</h1>
+          <p class="lead mb-0">With HTML5 Video and Bootstrap 4</p> -->
+          <div class="input-position-adjust">
+              <input type="text" name="U.S. City" placeholder="Add U.S. City Here">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+
+<!-- <form>
   <div class="input-position-adjust">
     <input type="text" name="U.S._Zip_Code" placeholder="Add U.S. Zip Code Here">
   </div>
-</form>
+</form> -->
 
 
 <!-- <p>More stuff. {{ example_context_variable }}.</p> -->
