@@ -5,17 +5,26 @@
 {% endblock title %}
 
 {% block content %}
-<div class="jumbotron">
-  <h1 class="display-4">My Site</h1>
-  <p class="lead">This is a simple Jumbotron component from Bootstrap 4.</p>
-  <hr class="my-4">
-  <p>Edit this to include your content.</p>
-  <p class="lead">
-    <a class="btn btn-primary btn-lg" href="{% url 'about' %}" role="button">Learn more</a>
-  </p>
-</div>
+
+
+<header>
+    <div class="overlay"></div>
+    <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+      <source src="/static/videos/landscape.mp4" type="video/mp4">
+    </video>
+    <div class="container h-100">
+      <div class="d-flex h-100 text-center align-items-center">
+        <div class="w-100 text-white">
+          <div class="input-position-adjust">
+              <input type="text" name="U.S. City" placeholder="Add U.S. City Here">
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
 
 {% endblock content %}
+
 
 
