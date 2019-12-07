@@ -23,7 +23,7 @@ input[type=text] {
   font-size: 16px;
   background-color: white;
   background-image: url('');
-  background-position: 10px 10px; 
+  background-position: 10px 10px;
   background-repeat: no-repeat;
   padding: 12px 20px 12px 40px;
   -webkit-transition: width 0.4s ease-in-out;
@@ -54,14 +54,14 @@ form {
 body, html {
     height: 100%;
   }
-  
+
   body {
     /* The image used */
     background-image: url('/static/images/wood.jpg');
-  
+
     /* Full height */
     height: 100%;
-  
+
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
@@ -83,9 +83,8 @@ header {
     min-height: 25rem;
     width: 100%;
     overflow: hidden;
-    filter:brightness(400%);
   }
-  
+
   header video {
     position: absolute;
     top: 50%;
@@ -100,22 +99,22 @@ header {
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
   }
-  
+
   header .container {
     position: relative;
     z-index: 2;
   }
-  
-  header .overlay {
+
+  /* header .overlay {
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: black; 
+    background-color: black;
     z-index: 1;
-  }
-  
+  } */
+
 /* About Page Images */
 
 <link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet">
@@ -137,7 +136,7 @@ body {
   background: #fff;
   padding: 1rem;
   box-shadow: 0 0.2rem 1.2rem rgba(0,0,0,0.2);
-  
+
 }
 .polaroid > img{
   max-width: 100%;
