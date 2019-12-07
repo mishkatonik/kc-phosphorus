@@ -78,11 +78,12 @@ a {
 
 header {
     position: relative;
-    background-color: black;
+    /* background-color: black; */
     height: 75vh;
     min-height: 25rem;
     width: 100%;
     overflow: hidden;
+    filter:brightness(400%);
   }
   
   header video {
@@ -111,20 +112,10 @@ header {
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: black;
-    opacity: 0.5;
+    background-color: black; 
     z-index: 1;
   }
   
-  @media (pointer: coarse) and (hover: none) {
-    header {
-      background: url('https://source.unsplash.com/XT5OInaElMw/1600x900') black no-repeat center center scroll;
-    }
-    header video {
-      display: none;
-    }
-  }
-
 /* About Page Images */
 
 <link href="https://fonts.googleapis.com/css?family=Poor+Story" rel="stylesheet">
