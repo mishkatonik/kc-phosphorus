@@ -30,3 +30,4 @@ def get_location(request):
     }
     print(forecast)
     return render(request, 'jobsearch.html', context)   # change 'jobsearch' to whatever template
+
