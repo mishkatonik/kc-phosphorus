@@ -15,7 +15,7 @@
       <div class="d-flex h-100 text-center align-items-center">
         <div class="w-100 text-white">
           <div class="input-position-adjust">
-              <input type="text" name="U.S. City" placeholder="Add U.S. City Here">
+              <input type="text" name="city" placeholder="Add U.S. City Here">
           </div>
         </div>
       </div>
@@ -24,3 +24,16 @@
 
 
 {% endblock content %}
+
+
+
+
+<!-- 
+django form response, doesn't quite work ({form.as_p} csrf_token were removed for now)
+{% if request.method == POST %}
+  <p>Today's sunrise: {{ forecast.astronomy.astronomy.0.sunrise }}</p>
+  <p>Today's sunset: {{ forecast.astronomy.astronomy.0.sunset }}</p>
+{% endif %} 
+-->
+
+
