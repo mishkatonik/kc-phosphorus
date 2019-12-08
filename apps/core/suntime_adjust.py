@@ -40,58 +40,64 @@ heremaps_data = {
 # DATA RETRIEVAL CHECK - - - - - - - - - - - - - - - - - - -
 sunrise = heremaps_data["astronomy"]["astronomy"][0]["sunrise"]
 sunset = heremaps_data["astronomy"]["astronomy"][0]["sunset"]
-print("Sunrise at:", sunrise)   # ***can remove later
-print("Sunset at:", sunset)     # ***can remove later
+print("Sunrise at:", sunrise)
+print("Sunset at:", sunset)
+
 # * * * * * * * Possibly run both? Perhaps conditional?
-# Continue with 'sunset' values
+# Starting with single hard-coded sample of 'sunset' as the ~value
+suntime = sunset
 
+def adjust_suntime():
+    # Assign non-numeric elements from string to variables, numbers into integers
+    print('\nSpecified time:', suntime, '------------------------')
+    print('\nStripping specified time  ---------------------------')
 
-# TIME DECONSTRUCTION - - - - - - - - - - - - - - - - - - -
-# Assign non-numeric elements from string to variables
-am_pm = sunset[-2:]  # Low likleyhood that am/pm will change for any location
-colon = sunset[-5]
+    am_pm = suntime[-2:]  # Low likleyhood that am/pm will change for any location
+    colon = suntime[-5]
+    rise_set_nums = re.sub("AM|PM", "", suntime)  # removes non-numeric elements
+    hours_mins = rise_set_nums.split(":")            # splits 'numbers' into list
+    print('hours, minutes =', hours_mins)   # ***can remove later 
+    
+    hours = int(hours_mins[0])
+    minutes = int(hours_mins[1])
+    print('Non-numeric elements stripped  ---------------------------')
 
+    # TIME ADJUSTMENT - - - - - - - - - - - - - - - - - - -
+    adjusted_minutes = int(input("Adjustment in minutes: "))
+    adjusted_hours = 0
 
-rise_set_nums = re.sub("AM|PM", "", sunset)  # remove non-numeric elements
-hours_mins = rise_set_nums.split(":")            # splits 'numbers' into list
-print('hours_mins =', hours_mins)   # ***can remove later 
-hours = int(hours_mins[0])
-minutes = int(hours_mins[1])
-print("hours:", hours, "\nminutes: ", minutes)  # ***can remove later
+    # Accounts for longer range of adjustment time
+    if adjusted_minutes > 60:
+        adjusted_hours = adjusted_minutes // 60
+        adjusted_minutes = adjusted_minutes % 60
+        if adjusted_hours > hours:
+            hours = hours - adjusted_hours + 12 
+            minutes -= adjusted_minutes
+            if minutes < 0:
+                minutes += 60
+        else:
+            hours -= adjusted_hours
 
-
-# TIME ADJUSTMENT - - - - - - - - - - - - - - - - - - -
-adjusted_minutes = int(input("Adjustment in minutes: "))
-adjusted_hours = 0
-
-# Accounts for longer range of adjustment time
-if adjusted_minutes > 60:
-    adjusted_hours = adjusted_minutes // 60
-    adjusted_minutes = adjusted_minutes % 60
-    if adjusted_hours > hours:
-        hours = hours - adjusted_hours + 12 
-        minutes -= adjusted_minutes
-        if minutes < 0:
-            minutes += 60
+    # Accounts for short range of adjustment time
+    if adjusted_minutes > minutes:  
+        hours -= 1
+        minutes = minutes - adjusted_minutes + 60
     else:
-        hours -= adjusted_hours
+        minutes -= adjusted_minutes
 
-# Accounts for short range of adjustment time
-if adjusted_minutes > minutes:  
-    hours -= 1
-    minutes = minutes - adjusted_minutes + 60
-else:
-    minutes -= adjusted_minutes
-
-# Convert adjusted times back to strings
-hours = str(hours)
-if minutes < 10:
-    minutes = str(minutes)
-    minutes = "0" + minutes
-else:
-    minutes = str(minutes)
-
-
+    # Convert adjusted times back to strings
+    hours = str(hours)
+    if minutes < 10:
+        minutes = str(minutes)
+        minutes = "0" + minutes
+    else:
+        minutes = str(minutes)
+    
+    
 # TIME RECONSTRUCTION & DISPLAY- - - - - - - - - - - - - - - - - - -
-display_time = hours + colon + minutes + am_pm
-print('Display: "REMINDER @"', display_time)
+    display_time = hours + colon + minutes + am_pm
+    print('Display: "REMINDER @"', display_time)
+
+
+
+adjust_suntime()
