@@ -33,7 +33,7 @@ def get_location(request):
         form = PostCity(request.POST)
         if form.is_valid():
             city = form.cleaned_data['city']
-        # city = request.POST.get('city')   # 'U.S. City' should match the name on the form ie <input name="city"...>
+        # city = request.POST.get('city')   # 'city' here should match the name on the form ie <input name="city"...>
             path = (path + app_id_str + app_code_str + product_str + '&name=' + city)
     else:
         form = PostCity()
