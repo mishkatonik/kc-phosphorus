@@ -48,15 +48,15 @@ print("Sunset at:", sunset)
 suntime = sunset
 
 def adjust_suntime():
-    # Assign non-numeric elements from string to variables, numbers into integers
     print('\nSpecified time:', suntime, '------------------------')
     print('\nStripping specified time  ---------------------------')
 
-    am_pm = suntime[-2:]  # Low likleyhood that am/pm will change for any location
+    # Assigns non-numeric elements from string to variables, numbers into integers
+    am_pm = suntime[-2:]
     colon = suntime[-5]
-    rise_set_nums = re.sub("AM|PM", "", suntime)  # removes non-numeric elements
-    hours_mins = rise_set_nums.split(":")            # splits 'numbers' into list
-    print('hours, minutes =', hours_mins)   # ***can remove later 
+    time_numbers = re.sub("AM|PM", "", suntime)
+    hours_mins = time_numbers.split(":")
+    print('hours, minutes =', hours_mins)
     
     hours = int(hours_mins[0])
     minutes = int(hours_mins[1])
@@ -92,7 +92,7 @@ def adjust_suntime():
         minutes = "0" + minutes
     else:
         minutes = str(minutes)
-    
+        
     
 # TIME RECONSTRUCTION & DISPLAY- - - - - - - - - - - - - - - - - - -
     display_time = hours + colon + minutes + am_pm

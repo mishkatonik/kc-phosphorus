@@ -2,7 +2,7 @@ from suntime_adjust import adjust_suntime
 
 suntime = "4:35PM"   # Replace later with API grab
 
-adjust_suntime()
+adjust_suntime()    # Function requires data in variable "suntime"
 
-# imports twice: here + importfile
 # function import successful
+# function currently runs twice here- here and in imported file
