@@ -4,8 +4,7 @@ import requests
 import json
 
 class PostCity(forms.Form):
-    class Meta:
-        fields = ('city')
+    city = forms.CharField(label='Enter City', max_length=100)
 
 # def home(request, forecast):
 #     form = PostCity()
@@ -31,21 +30,23 @@ def get_location(request):
     app_code_str = '&app_code=0oEv8qe3sZdef3SclxN-lQ'
     product_str = '&product=forecast_astronomy'
     if request.method == 'POST':
-        city_name = request.POST.get('city')   # 'U.S. City' should match the name on the form ie <input name="city"...>
-        path = (path + app_id_str + app_code_str + product_str + '&name=' + city_name)
+        form = PostCity(request.POST)
+        if form.is_valid():
+            city = form.cleaned_data['city']
+        # city = request.POST.get('city')   # 'U.S. City' should match the name on the form ie <input name="city"...>
+            path = (path + app_id_str + app_code_str + product_str + '&name=' + city)
+    else:
+        form = PostCity()
     response = requests.get(path)
     forecast = json.loads(response.text)
-    # context = {
-    #     'forecast': forecast,
-    # }
     print(forecast)
-    form = PostCity()
     context = {
         'forecast': forecast,
         'form': form
     }
     return render(request, 'pages/home.html', context)
     # return forecast   
+
 
 
 #incomplete/non-returned function that retrieves a list of Longitude/Latitute coordinates as non decimal numbers

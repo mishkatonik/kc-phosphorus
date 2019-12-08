@@ -20,10 +20,11 @@
                 {{ form.as_p }}
                 <button type="submit">Submit</button>
               </form>
+          </div>
+          <div>
               {% if request.method == POST %}
-            <!-- The current time is: {{ forecast.astronomy.astronomy.0.utcTime }} -->
-                Today's sunrise: {{ forecast.astronomy.astronomy.0.sunrise }}
-                Today's sunset: {{ forecast.astronomy.astronomy.0.sunset }}
+                <p>Today's sunrise: {{ forecast.astronomy.astronomy.0.sunrise }}</p>
+                <p>Today's sunset: {{ forecast.astronomy.astronomy.0.sunset }}</p>
               {% endif %}
           </div>
         </div>
