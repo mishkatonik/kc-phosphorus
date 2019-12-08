@@ -1,12 +1,20 @@
 from django.shortcuts import render
+from django import forms
+import requests
+import json
 
-def home(request):
-    context = {
+class PostCity(forms.Form):
+    class Meta:
+        fields = ('city')
 
-    }
-
-    return render(request, 'pages/home.html', context)
-
+# def home(request, forecast):
+#     form = PostCity()
+#     forecast = get_location(request)
+#     context = {
+#         'forecast': forecast,
+#         'form': form
+#     }
+#     return render(request, 'pages/home.html', context)
 
 cindys_sun_info = "stuff about sun"
 
@@ -23,15 +31,21 @@ def get_location(request):
     app_code_str = '&app_code=0oEv8qe3sZdef3SclxN-lQ'
     product_str = '&product=forecast_astronomy'
     if request.method == 'POST':
-        city_name = request.POST.get('city')   # 'city' should match the name on the form ie <input name="city"...>
+        city_name = request.POST.get('city')   # 'U.S. City' should match the name on the form ie <input name="city"...>
         path = (path + app_id_str + app_code_str + product_str + '&name=' + city_name)
     response = requests.get(path)
     forecast = json.loads(response.text)
+    # context = {
+    #     'forecast': forecast,
+    # }
+    print(forecast)
+    form = PostCity()
     context = {
         'forecast': forecast,
+        'form': form
     }
-    print(forecast)
-    return render(request, 'jobsearch.html', context)   # change 'jobsearch' to whatever template
+    return render(request, 'pages/home.html', context)
+    # return forecast   
 
 
 #incomplete/non-returned function that retrieves a list of Longitude/Latitute coordinates as non decimal numbers
