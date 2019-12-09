@@ -53,7 +53,7 @@ input:focus::-ms-placeholder, textarea:focus::-ms-placeholder {
 /* on hover placeholder */
 
 input:hover::-webkit-input-placeholder, textarea:hover::-webkit-input-placeholder {
-  color: #e2dedb;
+  color: #d4e1ef;
   font-size: 0.875em;
 }
 
@@ -62,7 +62,7 @@ input:hover:focus::-webkit-input-placeholder, textarea:hover:focus::-webkit-inpu
 }
 
 input:hover::-moz-placeholder, textarea:hover::-moz-placeholder {
-  color: #e2dedb;
+  color: #d4e1ef;
   font-size: 0.875em;
 }
 
@@ -71,7 +71,7 @@ input:hover:focus::-moz-placeholder, textarea:hover:focus::-moz-placeholder {
 }
 
 input:hover::placeholder, textarea:hover::placeholder {
-  color: #e2dedb;
+  color: #d4e1ef;
   font-size: 0.875em;
 }
 
@@ -80,7 +80,7 @@ input:hover:focus::placeholder, textarea:hover:focus::placeholder {
 }
 
 input:hover::placeholder, textarea:hover::placeholder {
-  color: #e2dedb;
+  color: #d4e1ef;
   font-size: 0.875em;
 }
 
@@ -130,7 +130,7 @@ input {
 }
 
 input:hover {
-  background: #b3aca7;
+  background: #b3c4d6;
   color: #e2dedb;
 }
 
@@ -175,12 +175,12 @@ textarea:hover {
   cursor: pointer;
 
   border: none;
-  /* border: solid 1px #b3aca7;
+  /* border: solid 1px #b3c4d6;
   border-top: none; */
 }
 
 #submit:hover {
-  color: #e2dedb;
+  color: #d4e1ef;
 }
 
 
@@ -191,18 +191,6 @@ body, html {
     height: 100%;
   }
 
-  body {
-    /* The image used */
-    background-image: url('');
-
-    /* Full height */
-    height: 100%;
-
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
 
 /* Font */
 
