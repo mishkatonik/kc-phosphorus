@@ -14,12 +14,16 @@ def get_location(request):
     app_id_str = '?app_id=LF6lB05BNhxMkZeX4gwP'
     app_code_str = '&app_code=0oEv8qe3sZdef3SclxN-lQ'
     product_str = '&product=forecast_astronomy'
+    city = request.POST['city']
+    # local_sunrise = None
+    # local_sunset = None
+
     if request.method == 'POST':
         form = PostCity(request.POST)
+    
         if form.is_valid():
             city = form.cleaned_data['city']
-        # 'city' here should match the name on the form ie <input name="city"...>
-            city = request.POST.get('city')
+            # 'city' here should match the name on the form ie <input name="city"...>
             path = (path + app_id_str + app_code_str + product_str + '&name=' + city)
             response = requests.get(path)
             forecast = json.loads(response.text)
@@ -27,29 +31,32 @@ def get_location(request):
             local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
             local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
             #need to change 'Local' below to user input city
-            print("Local Sunset: ", local_sunset)
-            print("Local Sunrise: ", local_sunrise)
-
+            # print("Local Sunset: ", local_sunset)
+            print(city, "Sunset:", local_sunset)
+            print(city, "Sunrise: ", local_sunrise)
+            return local_sunset, local_sunrise
     else:
         form = PostCity()
 
 #    where do we return the parameters local_sunset, local_sunrise?
 
+    # context = {
+    #     'sunrise': local_sunrise,
+    #     'sunset': local_sunset,
+    #     'form': form,
+    # }
+
+    # return render(request, 'pages/home.html', context)
+
+# Mish: this home func needs to either not be used, or the rendering needs to be taken 
+# out of the above get_location. I think it makes more sense to keep them separate.
+def home(request, local_sunset, local_sunrise):
+    # form = PostCity()
+    # forecast = get_location(request)
+    local_sunset, local_sunrise = get_location(request.POST)
     context = {
         'sunrise': local_sunrise,
         'sunset': local_sunset,
-        'form': form,
-    }
-
-    return render(request, 'pages/home.html', context)
-
-
-def home(request, local_sunset, local_sunrise):
-    form = PostCity()
-    forecast = get_location(request)
-    context = {
-        'sunrise': 'local_sunrise',
-        'sunset': 'local_sunset',
         'form': form,
     }
     return render(request, 'pages/home.html', context)
