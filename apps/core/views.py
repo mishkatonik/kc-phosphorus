@@ -2,27 +2,12 @@ from django.shortcuts import render
 from django import forms
 import requests
 import json
+# from PostCity.forms import PostCity
+
+# ************************* "enter city" form, class, render ************************************
 
 class PostCity(forms.Form):
-    city = forms.CharField(label='Enter City', max_length=100)
-    
-# def home(request, forecast):
-#     form = PostCity()
-#     forecast = get_location(request)
-#     context = {
-#         'forecast': forecast,
-#         'form': form
-#     }
-#     return render(request, 'pages/home.html', context)
-
-cindys_sun_info = "stuff about sun"
-
-def about(request):
-    context = {
-        'text': cindys_sun_info     # may extend from template
-    }
-
-    return render(request, 'pages/about.html', context)
+    city = forms.CharField(label='Enter City', max_length=50)
 
 def get_location(request):
     path = 'https://weather.api.here.com/weather/1.0/report.json'
@@ -33,23 +18,75 @@ def get_location(request):
         form = PostCity(request.POST)
         if form.is_valid():
             city = form.cleaned_data['city']
-            city = request.POST.get('city')   # 'city' here should match the name on the form ie <input name="city"...>
+        # 'city' here should match the name on the form ie <input name="city"...>
+            city = request.POST.get('city')
             path = (path + app_id_str + app_code_str + product_str + '&name=' + city)
+            response = requests.get(path)
+            forecast = json.loads(response.text)
+
+            local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
+            local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
+            #need to change 'Local' below to user input city
+            print("Local Sunset: ", local_sunset)
+            print("Local Sunrise: ", local_sunrise)
+
     else:
         form = PostCity()
-    response = requests.get(path)
-    forecast = json.loads(response.text)
-    # print(forecast)
+
+#    where do we return the parameters local_sunset, local_sunrise?
+
     context = {
-        'forecast': forecast,
-        'form': form
+        'sunrise': local_sunrise,
+        'sunset': local_sunset,
+        'form': form,
+    }
+
+    return render(request, 'pages/home.html', context)
+
+
+def home(request, local_sunset, local_sunrise):
+    form = PostCity()
+    forecast = get_location(request)
+    context = {
+        'sunrise': 'local_sunrise',
+        'sunset': 'local_sunset',
+        'form': form,
     }
     return render(request, 'pages/home.html', context)
-    # return forecast   
+
+
+####### AirVisual API, need to figure out how to pass city into it to get AQI ########
+
+def get_airquality(request, city):
+    path = "{{urlExternalAPI}}v2/city?city=Los Angeles&state=California&country=USA&key={{YOUR_API_KEY}}"
+    payload = {}
+    headers= {}
+    response = requests.request("GET", url, headers=headers, data = payload)
+    aqi = response['forecasts'][0]['aqius']
+    print(response.text.encode('utf8'))
 
 
 
-#incomplete/non-returned function that retrieves a list of Longitude/Latitute coordinates as non decimal numbers
+###################  OTHER HTML PAGE RENDERS #############################
+
+
+
+def about(request):
+    context = {
+        'text': cindys_sun_info     # may extend from template
+    }
+
+    # cindys_sun_info = "stuff about sun"
+
+    return render(request, 'pages/about.html', context)
+
+
+
+
+############ MOST LIKELY DEPRECATED, WILL DELETE SOON ###################
+
+#incomplete/non-returned function
+#that retrieves a list of Longitude/Latitute coordinates as non decimal numbers
 
 def get_purpleair(request):
     path = 'https://www.purpleair.com/json'
