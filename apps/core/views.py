@@ -14,13 +14,13 @@ def get_location(request):
     app_id_str = '?app_id=LF6lB05BNhxMkZeX4gwP'
     app_code_str = '&app_code=0oEv8qe3sZdef3SclxN-lQ'
     product_str = '&product=forecast_astronomy'
-    city = request.POST['city']
-    # local_sunrise = None
-    # local_sunset = None
+    # city = request.GET['city']
+    local_sunrise = None
+    local_sunset = None
 
-    if request.method == 'POST':
-        form = PostCity(request.POST)
-    
+    if request.method == 'GET':
+        form = PostCity(request.GET)
+        
         if form.is_valid():
             city = form.cleaned_data['city']
             # 'city' here should match the name on the form ie <input name="city"...>
@@ -40,20 +40,20 @@ def get_location(request):
 
 #    where do we return the parameters local_sunset, local_sunrise?
 
-    # context = {
-    #     'sunrise': local_sunrise,
-    #     'sunset': local_sunset,
-    #     'form': form,
-    # }
+    context = {
+        'sunrise': local_sunrise,
+        'sunset': local_sunset,
+        'form': form,
+    }
 
-    # return render(request, 'pages/home.html', context)
+    return render(request, 'pages/home.html', context)
 
 # Mish: this home func needs to either not be used, or the rendering needs to be taken 
 # out of the above get_location. I think it makes more sense to keep them separate.
 def home(request, local_sunset, local_sunrise):
     # form = PostCity()
     # forecast = get_location(request)
-    local_sunset, local_sunrise = get_location(request.POST)
+    local_sunset, local_sunrise = get_location(request.GET)
     context = {
         'sunrise': local_sunrise,
         'sunset': local_sunset,
@@ -68,7 +68,7 @@ def get_airquality(request, city):
     path = "{{urlExternalAPI}}v2/city?city=Los Angeles&state=California&country=USA&key={{YOUR_API_KEY}}"
     payload = {}
     headers= {}
-    response = requests.request("GET", url, headers=headers, data = payload)
+    response = requests.request("GET", url, headers=headers, data=payload)
     aqi = response['forecasts'][0]['aqius']
     print(response.text.encode('utf8'))
 
