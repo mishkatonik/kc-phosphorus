@@ -29,15 +29,17 @@ def get_location(request):
             #need to change 'Local' below to user input city
             print("Local Sunset: ", local_sunset)
             print("Local Sunrise: ", local_sunrise)
+            #    where do we return the parameters local_sunset, local_sunrise?
+            return local_sunset
+            return local_sunrise
 
     else:
         form = PostCity()
 
-#    where do we return the parameters local_sunset, local_sunrise?
 
     context = {
-        # 'sunrise': local_sunrise,
-        # 'sunset': local_sunset,
+        'local_sunrise': 'local_sunrise',
+        'local_sunset': 'local_sunset',
         'form': form,
     }
 
@@ -48,8 +50,8 @@ def home(request, local_sunset, local_sunrise):
     form = PostCity()
     forecast = get_location(request)
     context = {
-        # 'sunrise': 'local_sunrise',
-        # 'sunset': 'local_sunset',
+        'local_sunrise': 'local_sunrise',
+        'local_sunset': 'local_sunset',
         'form': form,
     }
     return render(request, 'pages/home.html', context)
