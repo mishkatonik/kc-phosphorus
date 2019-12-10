@@ -17,6 +17,7 @@ def get_location(request):
     product_str = '&product=forecast_astronomy'
     local_sunset = None
     local_sunrise = None
+    error_message = None
     if request.method == 'POST':
         form = PostCity(request.POST)
         if form.is_valid():
@@ -26,13 +27,16 @@ def get_location(request):
             path = (path + app_id_str + app_code_str + product_str + '&name=' + city)
             response = requests.get(path)
             forecast = json.loads(response.text)
-            local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
-            local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
-            #need to change 'Local' below to user input city
-            print("Local Sunset: ", local_sunset)
-            print("Local Sunrise: ", local_sunrise)
-            #    where do we return the parameters local_sunset, local_sunrise?
-
+            if 'Message' in forecast:
+                error_message = 'Hmm, looks like this city doesn\'t exist. Did you enter it correctly?'
+            else:
+                local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
+                local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
+                #need to change 'Local' below to user input city
+                print("Sunset", city, ":", local_sunset)
+                print("Sunrise for", city, ":", local_sunrise)
+                print(forecast)
+                #    where do we return the parameters local_sunset, local_sunrise?
 
     else:
         form = PostCity()
@@ -42,20 +46,11 @@ def get_location(request):
         'local_sunrise': local_sunrise,
         'local_sunset': local_sunset,
         'form': form,
+        'error_message': error_message,
     }
 
     return render(request, 'pages/home.html', context)
 
-
-def home(request, local_sunset, local_sunrise):
-    form = PostCity()
-    forecast = get_location(request)
-    context = {
-        'local_sunrise': 'local_sunrise',
-        'local_sunset': 'local_sunset',
-        'form': form,
-    }
-    return render(request, 'pages/home.html', context)
 
 
 ####### AirVisual API, need to figure out how to pass city into it to get AQI ########
@@ -84,20 +79,3 @@ def about(request):
     return render(request, 'pages/about.html', context)
 
 
-
-
-############ MOST LIKELY DEPRECATED, WILL DELETE SOON ###################
-
-#incomplete/non-returned function
-#that retrieves a list of Longitude/Latitute coordinates as non decimal numbers
-
-def get_purpleair(request):
-    path = 'https://www.purpleair.com/json'
-    response = requests.get(path)
-    purple_air_data = response.json()
-    sensor_list = purple_air_data['results']
-    # print(len(sensor_list))
-    # # print(sensor_list)
-    for sensor in sensor_list:
-        print("Longitude: ", int(round(sensor["Lon"])))
-        print("Latitude: ", int(round(sensor["Lat"])))
