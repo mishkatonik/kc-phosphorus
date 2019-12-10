@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django import forms
 import requests
 import json
@@ -31,8 +31,6 @@ def get_location(request):
             #need to change 'Local' below to user input city
             print("Local Sunset: ", local_sunset)
             print("Local Sunrise: ", local_sunrise)
-            #    where do we return the parameters local_sunset, local_sunrise?
-
 
     else:
         form = PostCity()
@@ -44,17 +42,6 @@ def get_location(request):
         'form': form,
     }
 
-    return render(request, 'pages/home.html', context)
-
-
-def home(request, local_sunset, local_sunrise):
-    form = PostCity()
-    forecast = get_location(request)
-    context = {
-        'local_sunrise': 'local_sunrise',
-        'local_sunset': 'local_sunset',
-        'form': form,
-    }
     return render(request, 'pages/home.html', context)
 
 
