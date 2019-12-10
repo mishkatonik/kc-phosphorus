@@ -24,21 +24,23 @@
   </header>
 
   <div class="row">
-    <div class="col">
+    <div class="col-md">
         <form action="." method="GET">
             {% csrf_token %}
             {{ form.as_p }}
             <button>Submit</button>
         </form>
     </div>
-
+  </div>
 <!-- Below django still does not work to display data -->
+  <div class="row">
+    <div class="col-md">
+      {% if request.method == GET %}
 
-    {% if request.method == GET %}
+        <p>Today's sunrise: {{ local_sunset }}</p>
+        <p>Today's sunset: {{ local_sunrise }}</p>
 
-      <p>Today's sunrise: {{ local_sunset }}</p>
-      <p>Today's sunset: {{ local_sunrise }}</p>
-
-    {% endif %}
-
+      {% endif %}
+    </div>
+  </div>
 {% endblock content %}

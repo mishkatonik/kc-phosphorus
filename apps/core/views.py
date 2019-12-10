@@ -14,7 +14,7 @@ def get_location(request):
     app_id_str = '?app_id=LF6lB05BNhxMkZeX4gwP'
     app_code_str = '&app_code=0oEv8qe3sZdef3SclxN-lQ'
     product_str = '&product=forecast_astronomy'
-    # city = request.GET['city']
+    # var placeholders to avoid 'referenced before assignment' error
     local_sunrise = None
     local_sunset = None
 
@@ -30,11 +30,10 @@ def get_location(request):
 
             local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
             local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
-            #need to change 'Local' below to user input city
-            # print("Local Sunset: ", local_sunset)
-            print(city, "Sunset:", local_sunset)
+
             print(city, "Sunrise: ", local_sunrise)
-            return local_sunset, local_sunrise
+            print(city, "Sunset:", local_sunset)
+            
     else:
         form = PostCity()
 
