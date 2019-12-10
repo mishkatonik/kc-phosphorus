@@ -9,6 +9,7 @@ import json
 class PostCity(forms.Form):
     city = forms.CharField(label='Enter City', max_length=50)
 
+
 def get_location(request):
     path = 'https://weather.api.here.com/weather/1.0/report.json'
     app_id_str = '?app_id=LF6lB05BNhxMkZeX4gwP'
@@ -27,9 +28,15 @@ def get_location(request):
             path = (path + app_id_str + app_code_str + product_str + '&name=' + city)
             response = requests.get(path)
             forecast = json.loads(response.text)
-
             local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
             local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
+
+            #need to change 'Local' below to user input city
+            print("Local Sunset: ", local_sunset)
+            print("Local Sunrise: ", local_sunrise)
+            #    where do we return the parameters local_sunset, local_sunrise?
+            # return local_sunset
+            # return local_sunrise
 
             print(city, "Sunrise: ", local_sunrise)
             print(city, "Sunset:", local_sunset)
@@ -37,11 +44,10 @@ def get_location(request):
     else:
         form = PostCity()
 
-#    where do we return the parameters local_sunset, local_sunrise?
 
     context = {
-        'sunrise': local_sunrise,
-        'sunset': local_sunset,
+        'local_sunrise': 'local_sunrise',
+        'local_sunset': 'local_sunset',
         'form': form,
     }
 
@@ -56,6 +62,8 @@ def home(request, local_sunset, local_sunrise):
     context = {
         'sunrise': local_sunrise,
         'sunset': local_sunset,
+        # 'local_sunrise': 'local_sunrise',
+        # 'local_sunset': 'local_sunset',
         'form': form,
     }
     return render(request, 'pages/home.html', context)
