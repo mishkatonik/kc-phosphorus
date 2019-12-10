@@ -4,7 +4,7 @@ import requests
 import json
 # from PostCity.forms import PostCity
 
-# ************************* "enter city" form, class, render ************************************
+################# "enter city" form, class, render ###############################
 
 class PostCity(forms.Form):
     city = forms.CharField(label='Enter City', max_length=50)
@@ -33,7 +33,6 @@ def get_location(request):
             print("Local Sunrise: ", local_sunrise)
             #    where do we return the parameters local_sunset, local_sunrise?
 
-
     else:
         form = PostCity()
 
@@ -47,26 +46,24 @@ def get_location(request):
     return render(request, 'pages/home.html', context)
 
 
-def home(request, local_sunset, local_sunrise):
-    form = PostCity()
-    forecast = get_location(request)
-    context = {
-        'local_sunrise': 'local_sunrise',
-        'local_sunset': 'local_sunset',
-        'form': form,
-    }
-    return render(request, 'pages/home.html', context)
+################ AIRVISUAL GET AQI FUNCTION FROM IP ADDRESS ######################
 
 
-####### AirVisual API, need to figure out how to pass city into it to get AQI ########
-
-def get_airquality(request, city):
-    path = "{{urlExternalAPI}}v2/city?city=Los Angeles&state=California&country=USA&key={{YOUR_API_KEY}}"
+def get_airquality(request):
+    path = 'api.airvisual.com/v2/nearest_city?key={{SECRET_KEY}}'
     payload = {}
-    headers= {}
-    response = requests.request("GET", url, headers=headers, data = payload)
+    headers = {}
+    response = requests.request('GET', path, headers=headers, data = payload, allow_redirects=False, timeout=undefined)
+    print(response.text)
+    #aqi variable is written here
     aqi = response['forecasts'][0]['aqius']
-    print(response.text.encode('utf8'))
+    print(aqi)
+
+    context = {
+        'aqi': aqi,
+    }
+
+    return render(request, 'pages/home.html', context)
 
 
 
@@ -82,22 +79,3 @@ def about(request):
     # cindys_sun_info = "stuff about sun"
 
     return render(request, 'pages/about.html', context)
-
-
-
-
-############ MOST LIKELY DEPRECATED, WILL DELETE SOON ###################
-
-#incomplete/non-returned function
-#that retrieves a list of Longitude/Latitute coordinates as non decimal numbers
-
-def get_purpleair(request):
-    path = 'https://www.purpleair.com/json'
-    response = requests.get(path)
-    purple_air_data = response.json()
-    sensor_list = purple_air_data['results']
-    # print(len(sensor_list))
-    # # print(sensor_list)
-    for sensor in sensor_list:
-        print("Longitude: ", int(round(sensor["Lon"])))
-        print("Latitude: ", int(round(sensor["Lat"])))
