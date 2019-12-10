@@ -76,10 +76,8 @@ def get_airquality(request, city):
 
 def about(request):
     context = {
-        'text': cindys_sun_info     # may extend from template
+        'text': 'cool stuff about the sun'     # may extend from template
     }
-
-    # cindys_sun_info = "stuff about sun"
 
     return render(request, 'pages/about.html', context)
 
