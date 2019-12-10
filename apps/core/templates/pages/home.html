@@ -14,16 +14,16 @@
     <div class="col">
 
 
-      <form id="form" class="topBefore" method="POST">
-      <!-- <input id="name" type="text" placeholder="NAME OF CITY"> -->
-      {% csrf_token %}
-      {{ form.as_p }}
-      <p>
-      <input id="submit" type="submit" value="LET'S GO">
+<form id="form" class="topBefore" method="POST">
+<!-- <input id="name" type="text" placeholder="NAME OF CITY"> -->
+{% csrf_token %}
+{{ form.as_p }}
+<p>
+<input id="submit" type="submit" value="LET'S GO">
 
-      </form>
-    </div>
+</form>
   </div>
+    </div>
 
 <!-- Below django still does not work to display data -->
 
@@ -34,24 +34,11 @@
 <!-- {% endif %} -->
 
 <div class="row">
-  <div class="col-md">
+  <div class="col">
     {% if local_sunset %}
     <p>Today's sunset: {{ local_sunset }}</p>
 
     <p>Today's sunrise: {{ local_sunrise }}</p>
-    {% endif %}
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md">
-    {% if local_sunset %}
-    <p>Today's sunset: {{ local_sunset }}</p>
-
-    <p>Today's sunrise: {{ local_sunrise }}</p>
-    {% endif %}
-  </div>
-</div>
-
+  {% endif %}
 
 {% endblock content %}
