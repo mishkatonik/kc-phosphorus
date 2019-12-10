@@ -16,15 +16,15 @@ def get_location(request):
     app_code_str = '&app_code=0oEv8qe3sZdef3SclxN-lQ'
     product_str = '&product=forecast_astronomy'
     # var placeholders to avoid 'referenced before assignment' error
-    local_sunrise = None
-    local_sunset = None
 
-    if request.method == 'GET':
-        form = PostCity(request.GET)
-        
+    local_sunset = None
+    local_sunrise = None
+    if request.method == 'POST':
+        form = PostCity(request.POST)
         if form.is_valid():
             city = form.cleaned_data['city']
             # 'city' here should match the name on the form ie <input name="city"...>
+            city = request.POST.get('city')
             path = (path + app_id_str + app_code_str + product_str + '&name=' + city)
             response = requests.get(path)
             forecast = json.loads(response.text)
@@ -46,8 +46,8 @@ def get_location(request):
 
 
     context = {
-        'local_sunrise': 'local_sunrise',
-        'local_sunset': 'local_sunset',
+        'local_sunrise': local_sunrise,
+        'local_sunset': local_sunset,
         'form': form,
     }
 
