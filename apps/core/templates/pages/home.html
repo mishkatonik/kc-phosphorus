@@ -35,9 +35,10 @@
 
 <div class="row">
   <div class="col">
-<p>Today's sunset: {{ local_sunset }}</p>
+    {% if local_sunset %}
+    <p>Today's sunset: {{ local_sunset }}</p>
 
-<p>Today's sunrise: {{ local_sunrise }}</p>
-
+    <p>Today's sunrise: {{ local_sunrise }}</p>
+  {% endif %}
 
 {% endblock content %}
