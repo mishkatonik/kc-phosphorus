@@ -183,13 +183,8 @@ textarea:hover {
   color: #d4e1ef;
 }
 
+/* About Page */
 
-
-
-/* Background Image */
-body, html {
-    height: 100%;
-  }
-
-
-/* Font */
+* {
+  box-sizing: border-box;
+}
