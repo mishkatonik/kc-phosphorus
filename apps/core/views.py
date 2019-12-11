@@ -48,19 +48,10 @@ def get_location(request):
     return render(request, 'pages/home.html', context)
 
 
-<<<<<<< HEAD
 ####### AirVisual API, need to figure out how to pass city into it to get AQI ########
 
 def get_airquality(request, city):
     path = "{{urlExternalAPI}}v2/city?city=Los Angeles&state=California&country=USA&key={{YOUR_API_KEY}}"
-=======
-################ AIRVISUAL GET AQI FUNCTION FROM IP ADDRESS ######################
-
-
-def get_airquality(request):
-    path = "https://api.airvisual.com/v2/nearest_city?key={}".format(environment.SECRET_KEY)
-
->>>>>>> b231056b5fe7161e924399ccdbe2e7868be33e47
     payload = {}
     headers = {}
     response = requests.request('GET', path, headers=headers, data = payload, allow_redirects=False)
