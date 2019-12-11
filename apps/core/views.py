@@ -4,7 +4,6 @@ import requests
 import json
 import environment
 
-################# "enter city" form, class, render ###############################
 
 class PostCity(forms.Form):
     city = forms.CharField(label='Enter City', max_length=50)
@@ -17,6 +16,7 @@ def get_location(request):
     product_str = '&product=forecast_astronomy'
     local_sunset = None
     local_sunrise = None
+    local_ip_aqi = None
     if request.method == 'POST':
         form = PostCity(request.POST)
         if form.is_valid():
@@ -29,9 +29,9 @@ def get_location(request):
             local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
             local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
             #need to change 'Local' below to user input city
-            print("Local Sunset: ", local_sunset)
-            print("Local Sunrise: ", local_sunrise)
-            get_airquality(request)
+            # print("Local Sunset: ", local_sunset)
+            # print("Local Sunrise: ", local_sunrise)
+            local_ip_aqi = get_airquality(request)
 
     else:
         form = PostCity()
@@ -40,13 +40,14 @@ def get_location(request):
     context = {
         'local_sunrise': local_sunrise,
         'local_sunset': local_sunset,
+        'local_ip_aqi': local_ip_aqi,
         'form': form,
     }
 
     return render(request, 'pages/home.html', context)
 
 
-################ AIRVISUAL GET AQI FUNCTION FROM IP ADDRESS ######################
+################ AIRVISUAL GET LOCAL AQI BASED ON IP ADDRESS ##############
 
 
 def get_airquality(request):
@@ -54,20 +55,18 @@ def get_airquality(request):
     payload = {}
     headers = {}
     response = requests.request('GET', path, headers=headers, data = payload, allow_redirects=False)
-    print('RESPONSE DOT TEXT:')
     text_response = response.text
-    print(text_response)
-    # aqi = text_response['data']['current']['pollution']['aqius']
-    print(text_response[1][4][1][1])
+    local_ip_aqi = json.loads(text_response)['data']['current']['pollution']['aqius']
+    print('LOCAL AQI', local_ip_aqi)
 
-
+    return local_ip_aqi
 
 
 
 ###################  OTHER HTML PAGE RENDERS #############################
 def login(request):
     context = {
-        'text': 'cool stuff about the sun'     # may extend from template
+        '': ''     
     }
 
     return render(request, 'pages/login.html', context)
