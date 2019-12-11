@@ -7,7 +7,7 @@
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
-  opacity: 0.30;
+  opacity: 0.35;
 }
 
 /* CSS FOR SUBMISSION FORM */
@@ -184,6 +184,7 @@ textarea:hover {
 }
 
 /* About Page */
+<<<<<<< HEAD
 }
 
 .wrapper {
@@ -284,3 +285,5 @@ textarea:hover {
   transition: all 0.35s;
 }
 
+=======
+>>>>>>> b231056b5fe7161e924399ccdbe2e7868be33e47
