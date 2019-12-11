@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django import forms
 import requests
 import json
+import environment
 # from PostCity.forms import PostCity
 
 ################# "enter city" form, class, render ###############################
@@ -31,6 +32,7 @@ def get_location(request):
             #need to change 'Local' below to user input city
             print("Local Sunset: ", local_sunset)
             print("Local Sunrise: ", local_sunrise)
+            get_airquality(request)
             #    where do we return the parameters local_sunset, local_sunrise?
 
     else:
@@ -46,31 +48,20 @@ def get_location(request):
     return render(request, 'pages/home.html', context)
 
 
-<<<<<<< HEAD
-####### AirVisual API, need to figure out how to pass city into it to get AQI ########
-
-def get_airquality(request, city):
-    path = "{{urlExternalAPI}}v2/city?city=Los Angeles&state=California&country=USA&key={{YOUR_API_KEY}}"
-=======
 ################ AIRVISUAL GET AQI FUNCTION FROM IP ADDRESS ######################
 
 
 def get_airquality(request):
-    path = 'api.airvisual.com/v2/nearest_city?key={{SECRET_KEY}}'
->>>>>>> 9327fa8b57b2e9425a50260ba67b0ae88dc65ef2
+    path = "https://api.airvisual.com/v2/nearest_city?key={}".format(environment.SECRET_KEY)
+
     payload = {}
     headers = {}
-    response = requests.request('GET', path, headers=headers, data = payload, allow_redirects=False, timeout=undefined)
+    response = requests.request('GET', path, headers=headers, data = payload, allow_redirects=False)
+    print('RESPONSE DOT TEXT:')
     print(response.text)
     #aqi variable is written here
-    aqi = response['forecasts'][0]['aqius']
-    print(aqi)
-
-    context = {
-        'aqi': aqi,
-    }
-
-    return render(request, 'pages/home.html', context)
+    # aqi = response['forecasts'][0]['aqius']
+    # print(aqi)
 
 
 

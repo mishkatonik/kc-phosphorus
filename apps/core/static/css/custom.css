@@ -7,7 +7,7 @@
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
-  opacity: 0.30;
+  opacity: 0.35;
 }
 
 /* CSS FOR SUBMISSION FORM */
@@ -184,7 +184,3 @@ textarea:hover {
 }
 
 /* About Page */
-
-* {
-  box-sizing: border-box;
-}
