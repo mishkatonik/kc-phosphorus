@@ -10,6 +10,8 @@ class PostCity(forms.Form):
     city = forms.CharField(label='Enter City', max_length=50)
 
 
+
+
 def get_location(request):
     path = 'https://weather.api.here.com/weather/1.0/report.json'
     app_id_str = '?app_id=LF6lB05BNhxMkZeX4gwP'
@@ -71,7 +73,7 @@ def get_airquality(request, city):
 
 def about(request):
     context = {
-        'text': cindys_sun_info     # may extend from template
+        'text': "text"     # may extend from template
     }
 
     # cindys_sun_info = "stuff about sun"

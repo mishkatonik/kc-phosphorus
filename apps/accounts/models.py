@@ -27,3 +27,17 @@ class User(AbstractUser):
             size_str = ''
 
         return GRAVATAR_URL % (digest, size_str)
+
+
+class Location(models.Model):
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+    )
+
+    city = models.CharField(max_length=160)
+    us_state = models.CharField(max_length=2)
+    country = models.CharField(max_length=160)
+    
+    created = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
