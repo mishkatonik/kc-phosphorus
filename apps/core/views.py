@@ -9,6 +9,8 @@ class PostCity(forms.Form):
     city = forms.CharField(label='Enter City', max_length=50)
 
 
+
+
 def get_location(request):
     path = 'https://weather.api.here.com/weather/1.0/report.json'
     app_id_str = '?app_id=LF6lB05BNhxMkZeX4gwP'
@@ -82,9 +84,7 @@ def login(request):
 
 
 def about(request):
-    context = {
-        'text': 'cool stuff about the sun'     # may extend from template
-    }
+    context = {}
 
     return render(request, 'pages/about.html', context)
 

@@ -1,14 +1,16 @@
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django import forms
 # from PostCity.models import PostCity #added
-from apps.accounts.models import User
+from apps.accounts.models import User, Location
 
 
 
-# class PostCity(forms.ModelForm):
-#     class Meta():
-#         model = PostCity
-#         fields = '__all__'
+# Add a Location ----------------------------------------------------------
+
+class NewLocationForm(forms.ModelForm):
+    class Meta:
+        model = Location
+        fields = ('city', 'us_state', 'country')
 
 
 ####### auto generated classes below ###########

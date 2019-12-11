@@ -5,9 +5,10 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
-from apps.accounts.forms import UserEditForm, SignupForm
+from apps.accounts.forms import UserEditForm, SignupForm, NewLocationForm
 from apps.accounts.models import User
 
+# USER SETUP --------------------------------------------------------
 def log_in(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, request.POST)
@@ -85,4 +86,20 @@ def edit_profile(request):
     }
     return render(request, 'accounts/edit_profile.html', context)
 
+# Add a Location ----------------------------------------------------------
 
+def add_location(request):
+    if request.method == 'POST':
+        form = NewLocationForm(request.POST)
+        if form.is_valid():
+            location = form.save()
+
+            # Log-in the user right away
+            return redirect('home')
+    else:
+        form = NewLocationForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/add-location.html', context)
