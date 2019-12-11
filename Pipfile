@@ -11,6 +11,7 @@ gunicorn = "*"
 psycopg2-binary = "*"
 python-dateutil = "*"
 requests = "*"
+django-environ = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
