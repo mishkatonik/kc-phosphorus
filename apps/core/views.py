@@ -1,10 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django import forms
 import requests
 import json
-# from PostCity.forms import PostCity
+import environment
 
-# ************************* "enter city" form, class, render ************************************
 
 class PostCity(forms.Form):
     city = forms.CharField(label='Enter City', max_length=50)
@@ -20,6 +19,8 @@ def get_location(request):
     local_sunset = None
     local_sunrise = None
     error_message = None
+    local_ip_aqi = None
+
     if request.method == 'POST':
         form = PostCity(request.POST)
         if form.is_valid():
@@ -29,6 +30,7 @@ def get_location(request):
             path = (path + app_id_str + app_code_str + product_str + '&name=' + city)
             response = requests.get(path)
             forecast = json.loads(response.text)
+
             if 'Message' in forecast:
                 error_message = 'Hmm, looks like this city doesn\'t exist. Did you enter it correctly?'
             else:
@@ -38,7 +40,7 @@ def get_location(request):
                 print("Sunset", city, ":", local_sunset)
                 print("Sunrise for", city, ":", local_sunrise)
                 print(forecast)
-                #    where do we return the parameters local_sunset, local_sunrise?
+                local_ip_aqi = get_airquality(request)
 
     else:
         form = PostCity()
@@ -47,6 +49,7 @@ def get_location(request):
     context = {
         'local_sunrise': local_sunrise,
         'local_sunset': local_sunset,
+        'local_ip_aqi': local_ip_aqi,
         'form': form,
         'error_message': error_message,
     }
@@ -54,30 +57,34 @@ def get_location(request):
     return render(request, 'pages/home.html', context)
 
 
+################ AIRVISUAL GET LOCAL AQI BASED ON IP ADDRESS ##############
 
-####### AirVisual API, need to figure out how to pass city into it to get AQI ########
 
-def get_airquality(request, city):
-    path = "{{urlExternalAPI}}v2/city?city=Los Angeles&state=California&country=USA&key={{YOUR_API_KEY}}"
+def get_airquality(request):
+    path = "https://api.airvisual.com/v2/nearest_city?key={}".format(environment.SECRET_KEY)
     payload = {}
-    headers= {}
-    response = requests.request("GET", url, headers=headers, data = payload)
-    aqi = response['forecasts'][0]['aqius']
-    print(response.text.encode('utf8'))
+    headers = {}
+    response = requests.request('GET', path, headers=headers, data = payload, allow_redirects=False)
+    text_response = response.text
+    local_ip_aqi = json.loads(text_response)['data']['current']['pollution']['aqius']
+    print('LOCAL AQI', local_ip_aqi)
+
+    return local_ip_aqi
 
 
 
 ###################  OTHER HTML PAGE RENDERS #############################
+def login(request):
+    context = {
+        '': ''     
+    }
+
+    return render(request, 'pages/login.html', context)
 
 
 
 def about(request):
-    context = {
-        'text': "text"     # may extend from template
-    }
-
-    # cindys_sun_info = "stuff about sun"
+    context = {}
 
     return render(request, 'pages/about.html', context)
-
 
