@@ -3,7 +3,6 @@ from django import forms
 import requests
 import json
 import environment
-# from PostCity.forms import PostCity
 
 ################# "enter city" form, class, render ###############################
 
@@ -33,7 +32,6 @@ def get_location(request):
             print("Local Sunset: ", local_sunset)
             print("Local Sunrise: ", local_sunrise)
             get_airquality(request)
-            #    where do we return the parameters local_sunset, local_sunrise?
 
     else:
         form = PostCity()
@@ -53,19 +51,26 @@ def get_location(request):
 
 def get_airquality(request):
     path = "https://api.airvisual.com/v2/nearest_city?key={}".format(environment.SECRET_KEY)
-
     payload = {}
     headers = {}
     response = requests.request('GET', path, headers=headers, data = payload, allow_redirects=False)
     print('RESPONSE DOT TEXT:')
-    print(response.text)
-    #aqi variable is written here
-    # aqi = response['forecasts'][0]['aqius']
-    # print(aqi)
+    text_response = response.text
+    print(text_response)
+    # aqi = text_response['data']['current']['pollution']['aqius']
+    print(text_response[1][4][1][1])
+
+
 
 
 
 ###################  OTHER HTML PAGE RENDERS #############################
+def login(request):
+    context = {
+        'text': 'cool stuff about the sun'     # may extend from template
+    }
+
+    return render(request, 'pages/login.html', context)
 
 
 
