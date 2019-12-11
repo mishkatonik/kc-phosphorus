@@ -10,35 +10,29 @@
 
 
 
-  <div class="row">
-    <div class="col">
-
-
-<form id="form" class="topBefore" method="POST">
-<!-- <input id="name" type="text" placeholder="NAME OF CITY"> -->
-{% csrf_token %}
-{{ form.as_p }}
-<p>
-<input id="submit" type="submit" value="LET'S GO">
-
-</form>
-  </div>
-    </div>
-
-<!-- Below django still does not work to display data -->
-
-<!--
-{% if request.method == POST %} -->
-
-
-<!-- {% endif %} -->
-
 <div class="row">
   <div class="col">
-    {% if local_sunset %}
+
+
+  {% if local_sunrise and local_sunset %}
+
     <p>Today's sunset: {{ local_sunset }}</p>
     <p>Today's sunrise: {{ local_sunrise }}</p>
-    <p> {{ aqi }} </p> 
+
+  {% else %}
+
+    <form id="form" class="topBefore" method="POST">
+      <!-- <input id="name" type="text" placeholder="NAME OF CITY"> -->
+      {% csrf_token %}
+      {{ form.as_p }}
+      <p>
+      <input id="submit" type="submit" value="LET'S GO">
+    </form>
+
   {% endif %}
+
+
+  </div>
+</div>
 
 {% endblock content %}

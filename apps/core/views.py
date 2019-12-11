@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django import forms
 import requests
 import json
@@ -46,11 +46,18 @@ def get_location(request):
     return render(request, 'pages/home.html', context)
 
 
+<<<<<<< HEAD
+####### AirVisual API, need to figure out how to pass city into it to get AQI ########
+
+def get_airquality(request, city):
+    path = "{{urlExternalAPI}}v2/city?city=Los Angeles&state=California&country=USA&key={{YOUR_API_KEY}}"
+=======
 ################ AIRVISUAL GET AQI FUNCTION FROM IP ADDRESS ######################
 
 
 def get_airquality(request):
     path = 'api.airvisual.com/v2/nearest_city?key={{SECRET_KEY}}'
+>>>>>>> 9327fa8b57b2e9425a50260ba67b0ae88dc65ef2
     payload = {}
     headers = {}
     response = requests.request('GET', path, headers=headers, data = payload, allow_redirects=False, timeout=undefined)
