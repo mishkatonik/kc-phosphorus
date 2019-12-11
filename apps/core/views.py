@@ -16,7 +16,9 @@ def get_location(request):
     product_str = '&product=forecast_astronomy'
     local_sunset = None
     local_sunrise = None
+    error_message = None
     local_ip_aqi = None
+
     if request.method == 'POST':
         form = PostCity(request.POST)
         if form.is_valid():
@@ -26,12 +28,17 @@ def get_location(request):
             path = (path + app_id_str + app_code_str + product_str + '&name=' + city)
             response = requests.get(path)
             forecast = json.loads(response.text)
-            local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
-            local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
-            #need to change 'Local' below to user input city
-            # print("Local Sunset: ", local_sunset)
-            # print("Local Sunrise: ", local_sunrise)
-            local_ip_aqi = get_airquality(request)
+
+            if 'Message' in forecast:
+                error_message = 'Hmm, looks like this city doesn\'t exist. Did you enter it correctly?'
+            else:
+                local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
+                local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
+                #need to change 'Local' below to user input city
+                print("Sunset", city, ":", local_sunset)
+                print("Sunrise for", city, ":", local_sunrise)
+                print(forecast)
+                local_ip_aqi = get_airquality(request)
 
     else:
         form = PostCity()
@@ -42,6 +49,7 @@ def get_location(request):
         'local_sunset': local_sunset,
         'local_ip_aqi': local_ip_aqi,
         'form': form,
+        'error_message': error_message,
     }
 
     return render(request, 'pages/home.html', context)
@@ -79,3 +87,4 @@ def about(request):
     }
 
     return render(request, 'pages/about.html', context)
+
