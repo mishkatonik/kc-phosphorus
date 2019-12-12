@@ -37,9 +37,9 @@ def get_location(request):
                 local_sunrise = forecast['astronomy']['astronomy'][0]['sunrise']
                 local_sunset = forecast['astronomy']['astronomy'][0]['sunset']
                 #need to change 'Local' below to user input city
-                print("Sunset", city, ":", local_sunset)
-                print("Sunrise for", city, ":", local_sunrise)
-                print(forecast)
+                # print("Sunset", city, ":", local_sunset)
+                # print("Sunrise for", city, ":", local_sunrise)
+                # print(forecast)
                 local_ip_aqi = get_airquality(request)
 
     else:
@@ -76,7 +76,7 @@ def get_airquality(request):
 ###################  OTHER HTML PAGE RENDERS #############################
 def login(request):
     context = {
-        '': ''     
+        '': ''
     }
 
     return render(request, 'pages/login.html', context)
@@ -90,4 +90,3 @@ def contact(request):
     context = {}
 
     return render(request, 'pages/contact.html', context)
-
