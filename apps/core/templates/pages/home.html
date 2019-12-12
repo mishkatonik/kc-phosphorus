@@ -6,55 +6,59 @@
 
 {% block content %}
 
-<header> WHERE ARE YOU? </header>
+    {% if local_sunrise and local_sunset %}
+
+          <header> PHOSPHORUS </header>
+
+        <!-- different background video after user submits locations -->
+          <video autoplay muted loop id="myVideo">
+            <source src="/static/videos/sunset.mp4" type="video/mp4">
+          </video>
+
+          <!-- listing output infor from form results -->
+
+            <p>Today's sunset: {{ local_sunset }}</p>
+            <p>Today's sunrise: {{ local_sunrise }}</p>
 
 
-<div class="row">
-  <div class="col">
+            <p>Local AQI: {{ local_ip_aqi }} </p>
+
+              {% if int(local_ip_aqi) < 50 OR int(local_ip_aqi) == 50 %}
+                <p> <em>"GOOD"</em>
+                <p> Good day to be outside. </p>
+
+              {% elif if int(local_ip_aqi) < 100 OR int(local_ip_aqi) == 51 %}
+                <p> <em>"MODERATE"</em>
+                <p>Sensitive individuals should consider limiting prolonged outdoor exertion. </p>
+
+              {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
+                <p> <em>"UNHEALTHY FOR SENSITIVE GROUPS"</em>
+                <p>Limit prolonged outdoor exertion, and limit outdoor exposure for sensitive individuals. </p>
+
+              {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
+                <p> <em>"UNHEALTHY"</em>
+                <p>Everyone should limit outdoor exertion. Preferably, not go outside. </p>
+
+              {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
+                <p> <em>"VERY UNHEALTHY"</em>
+
+                  {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
+                <p> <em>"HAZARDOUS"</em>
+                  <p> Stay inside!!</p>
 
 
-  {% if local_sunrise and local_sunset %}
-
-
-<!-- different background video after user submits locations -->
-  <video autoplay muted loop id="myVideo">
-    <source src="/static/videos/sunset.mp4" type="video/mp4">
-  </video>
-
-  <!-- listing output infor from form results -->
-
-    <p>Today's sunset: {{ local_sunset }}</p>
-    <p>Today's sunrise: {{ local_sunrise }}</p>
-
-
-    <p>Local AQI: {{ local_ip_aqi }} </p>
-
-      {% if int(local_ip_aqi) < 50 OR int(local_ip_aqi) == 50 %}
-        <p> <em>"GOOD"</em>
-        <p> Good day to be outside. </p>
-      {% elif if int(local_ip_aqi) < 100 OR int(local_ip_aqi) == 51 %}
-        <p> <em>"MODERATE"</em>
-        <p>Sensitive individuals should consider limiting prolonged outdoor exertion. </p>
-      {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
-        <p> <em>"UNHEALTHY FOR SENSITIVE GROUPS"</em>
-        <p>Limit prolonged outdoor exertion, and limit outdoor exposure for sensitive individuals. </p>
-      {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
-        <p> <em>"UNHEALTHY"</em>
-        <p>Everyone should limit outdoor exertion. Preferably, not go outside. </p>
-      {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
-        <p> <em>"VERY UNHEALTHY"</em>
-
-          {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
-        <p> <em>"HAZARDOUS"</em>
-          <p> Stay inside!!</p>
-
-            {% endif %}
+        {% endif %}
 
 
   {% else %}
 
+  <header> WHERE ARE YOU? </header>
+
+  <div class="row">
+    <div class="col">
+
+
     <form id="form" class="topBefore" method="POST">
-      <!-- <input id="name" type="text" placeholder="NAME OF CITY"> -->
       {% csrf_token %}
       {{ form.as_p }}
       <p>
