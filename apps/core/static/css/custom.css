@@ -1,5 +1,14 @@
 /* Custom CSS goes here */
 
+.nav-link {
+
+  font-family: 'Lato', sans-serif;
+  background: #e2dedb;
+  color: #474442;
+
+}
+
+
 
 #myVideo {
   position: fixed;
@@ -183,7 +192,9 @@ textarea:hover {
   color: #d4e1ef;
 }
 
-/* About Page */
+
+
+/* gallery effects on about page thumbnail pics */
 
 .wrapper {
   width: 100%;
@@ -194,7 +205,7 @@ textarea:hover {
   background: #fff;
   padding: 1rem;
   box-shadow: 0 0.2rem 1.2rem rgba(0,0,0,0.2);
-  
+
 }
 .polaroid > img{
   max-width: 100%;

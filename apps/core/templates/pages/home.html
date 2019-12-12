@@ -9,12 +9,19 @@
 <header> WHERE ARE YOU? </header>
 
 
-
 <div class="row">
   <div class="col">
 
 
   {% if local_sunrise and local_sunset %}
+
+
+<!-- different background video after user submits locations -->
+  <video autoplay muted loop id="myVideo">
+    <source src="/static/videos/sunset.mp4" type="video/mp4">
+  </video>
+
+  <!-- listing output infor from form results -->
 
     <p>Today's sunset: {{ local_sunset }}</p>
     <p>Today's sunrise: {{ local_sunrise }}</p>
