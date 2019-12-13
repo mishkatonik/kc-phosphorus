@@ -37,26 +37,29 @@ heremaps_data = {
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # BASIC RETRIEVAL from dictionary structure above
-# utc retrieval
-print('\nTesting retrieval from API data structure - - - - - -')
-utc_time = heremaps_data["astronomy"]["astronomy"][0]["utcTime"]
-print("UTC Time: ", utc_time)
-# feed creation retrieval
-feed_creation = heremaps_data["feedCreation"]
-print("Feed Creation: ", feed_creation)
+def get_heremaps_utc():
+    print('\nTesting retrieval from API data structure - - - - - -')
+    utc_time = heremaps_data["astronomy"]["astronomy"][0]["utcTime"] # repalce w/api
+    print("UTC Time: ", utc_time)
+    # feed creation retrieval
+    feed_creation = heremaps_data["feedCreation"]
+    print("Feed Creation: ", feed_creation)
 
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-print('\nActual current time retrieval - - - - - - - - - - - -')
-current_time = datetime.now()
-print('(UTC-full): ', current_time)
-# Adjustment method for current local time
-current_time = datetime.now().strftime('%H:%M:%S')
-print(current_time)
+def get_current_time():
+    print('\nActual current time retrieval - - - - - - - - - - - -')
+    current_time = datetime.now()
+    print('(UTC-full): ', current_time)
+    # Adjustment method for current local time
+    current_time = datetime.now().strftime('%H:%M:%S')
+    print(current_time)
 
-time_adjustment = int(input("Number of minutes to adjust: "))
-adjusted_time = (datetime.now() + timedelta(minutes=-time_adjustment)).strftime('%H:%M:%S')
-print('Adjusted time: ', adjusted_time)
+def adjust_time():
+    time_adjustment = int(input("Number of minutes to adjust: "))
+    adjusted_time = (datetime.now() + timedelta(minutes=-time_adjustment)).strftime('%H:%M:%S')
+    print('Adjusted time: ', adjusted_time)
 
-
-
+get_heremaps_utc()
+get_current_time()
+adjust_time()

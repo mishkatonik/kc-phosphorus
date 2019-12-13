@@ -41,7 +41,7 @@ def get_location(request):
                 # print("Sunrise for", city, ":", local_sunrise)
                 # print(forecast)
                 local_ip_aqi = get_airquality(request)
-
+                return  # added to test send_sms.py --- can remove
     else:
         form = PostCity()
 
