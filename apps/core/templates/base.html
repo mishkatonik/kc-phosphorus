@@ -1,11 +1,10 @@
 {% load static %}
 
 <!DOCTYPE html>
+
+
 <html lang="en">
 
-<video autoplay muted loop id="myVideo">
-  <source src="/static/videos/landscape.mp4" type="video/mp4">
-</video>
 
 
   <head>
@@ -39,13 +38,15 @@
 
 <nav class="navbar navbar-expand-md">
     <div class="container">
-
-            Welcome to Phosphorus
+<!-- do we even need this title with the title templating above -->
+            Phosphorus
 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">
             </span>
         </button>
+
+{% if local_sunrise and local_sunset %}
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
@@ -58,6 +59,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'contact' %}">Contact</a>
                 </li>
+{% endif %}
+
                 <!-- <li class="nav-item">
                     <a class="nav-link" href="{% url 'view_all_users' %}">Users</a>
                 </li>
