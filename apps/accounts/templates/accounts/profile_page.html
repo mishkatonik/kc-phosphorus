@@ -20,7 +20,12 @@
     </div>
 
     <div class="col-md-9">
-        stuff could go here...
+        <h4>Locations</h4>
+        <ul>
+            {% for location in locations %}
+            <li>{{ location }}</li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 {% endblock %}
