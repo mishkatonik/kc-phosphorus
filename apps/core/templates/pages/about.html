@@ -1,22 +1,23 @@
 {% extends "base.html" %}
 
+
+
 {% block title %}
-    My Site - About
+  About Phosphorus
 {% endblock title %}
 
 {% block content %}
-<header>PHOSPHORUS</header>
 
-<p><em>Phosphorus</em> is an app for sun-based mindfulness. A Kickstart Coding Back-end Project.
+<video autoplay muted loop id="myVideo">
+  <source src="/static/videos/landscape.mp4" type="video/mp4">
+</video>
 
-<p>
-Get a reminder 30 minutes before sunrise or sunset to have a chance to get outside and enjoy the sun.
-Watching a sunrise/sunset has noted mental benefits, and is a great way to start or end your day.
+<header>ABOUT PHOSPHORUS</header>
 
-<p>
-<em> Phosphorus</em> utilizes HereMaps and AirVisual APIs to calculate geo-specific data based on user input and IP address.
-
-</p>
+<p id="form">Phosphorus is an app for sun-based mindfulness.
+  Get a reminder 30 minutes before sunrise and sunset to have a chance to get outside and enjoy the sun.
+  <p id="form">Watching a sunrise/sunset has noted mental benefits, and is a great way to start or end your day. </p>
+  <p id="form"><strong>Phosphorus</strong> uses HereMaps and Airvisual APIs to generate local geodata from user input. </p>
 
 <div class="wrapper">
 
@@ -36,7 +37,7 @@ Watching a sunrise/sunset has noted mental benefits, and is a great way to start
 
         <div class="item">
           <div class="polaroid"><img src="/static/images/nature.jpg">
-            <div class="caption"><a href="https://mrc.ukri.org/news/browse/scientists-uncover-how-sunlight-on-skin-reduces-eczema-inflammation/">Alleviates Skin Disorder</a>
+            <div class="caption"><a href="https://mrc.ukri.org/news/browse/scientists-uncover-how-sunlight-on-skin-reduces-eczema-inflammation/">Immunity</a>
             </div>
           </div>
         </div>
