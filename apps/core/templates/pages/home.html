@@ -6,24 +6,46 @@
 
 {% block content %}
 
-<header> WHERE ARE YOU? </header>
+    {% if local_sunrise and local_sunset %}
+
+          <header> PHOSPHORUS </header>
+
+        <!-- different background video after user submits locations -->
+          <video autoplay muted loop id="myVideo2">
+            <source src="/static/videos/sunset.mp4" type="video/mp4">
+          </video>
+
+          <!-- listing output infor from form results -->
+
+          <div class="row">
+            <div class="col" id="form" align="center">
+
+            <p>Today's sunset: {{ local_sunset }}</p>
+            <p>Today's sunrise: {{ local_sunrise }}</p>
+
+
+            <p>Local AQI: {{ local_ip_aqi }} </p>
 
 
 
-<div class="row">
-  <div class="col">
-
-
-  {% if local_sunrise and local_sunset %}
-
-    <p>Today's sunset: {{ local_sunset }}</p>
-    <p>Today's sunrise: {{ local_sunrise }}</p>
-    <p>Local AQI: {{ local_ip_aqi }} </p>
 
   {% else %}
 
+  <video autoplay muted loop id="myVideo">
+    <source src="/static/videos/landscape.mp4" type="video/mp4">
+  </video>
+
+  <header> WHERE ARE YOU? </header>
+
+
+
+  <div class="row">
+    <div class="col">
+
+
     <form id="form" class="topBefore" method="POST">
-      <!-- <input id="name" type="text" placeholder="NAME OF CITY"> -->
+      <p align="center"> We'll let you know when the sun is going down. </p>
+
       {% csrf_token %}
       {{ form.as_p }}
       <p>
