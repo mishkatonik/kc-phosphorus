@@ -9,7 +9,6 @@
 }
 
 
-
 #myVideo {
   position: fixed;
   right: 0;
@@ -128,6 +127,15 @@ header {
   position: relative;
   width: 470px;
   margin: 50px auto 100px auto;
+}
+
+#form2 {
+  position: relative;
+  width: 300px;
+  margin: 50px auto 100px auto;
+  font-weight: bold;
+  color: black; 
+
 }
 
 input {
