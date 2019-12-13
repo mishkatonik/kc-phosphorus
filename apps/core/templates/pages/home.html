@@ -23,29 +23,29 @@
 
             <p>Local AQI: {{ local_ip_aqi }} </p>
 
-              {% if int(local_ip_aqi) < 50 OR int(local_ip_aqi) == 50 %}
+              <!-- {% if int("local_ip_aqi") < 50 %}
                 <p> <em>"GOOD"</em>
                 <p> Good day to be outside. </p>
 
-              {% elif if int(local_ip_aqi) < 100 OR int(local_ip_aqi) == 51 %}
+              {% elif if int("local_ip_aqi") < 100 OR int("local_ip_aqi") == 51 %}
                 <p> <em>"MODERATE"</em>
                 <p>Sensitive individuals should consider limiting prolonged outdoor exertion. </p>
 
-              {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
+              {% elif if int("local_ip_aqi") < 200 OR int("local_ip_aqi") == 151 %}
                 <p> <em>"UNHEALTHY FOR SENSITIVE GROUPS"</em>
                 <p>Limit prolonged outdoor exertion, and limit outdoor exposure for sensitive individuals. </p>
 
-              {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
+              {% elif if int("local_ip_aqi") < 200 OR int("local_ip_aqi") == 151 %}
                 <p> <em>"UNHEALTHY"</em>
                 <p>Everyone should limit outdoor exertion. Preferably, not go outside. </p>
 
-              {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
+              {% elif if int("local_ip_aqi") < 200 OR int("local_ip_aqi") == 151 %}
                 <p> <em>"VERY UNHEALTHY"</em>
 
-                  {% elif if int(local_ip_aqi) < 200 OR int(local_ip_aqi) == 151 %}
+                  {% elif if int("local_ip_aqi") < 200 OR int("local_ip_aqi") == 151 %}
                 <p> <em>"HAZARDOUS"</em>
                   <p> Stay inside!!</p>
-
+ -->
 
         {% endif %}
 
@@ -54,7 +54,7 @@
 
   <header> WHERE ARE YOU? </header>
 
-  <p> We'll let you know when the sun is going down. </p> 
+  <p> We'll let you know when the sun is going down. </p>
 
   <div class="row">
     <div class="col">
