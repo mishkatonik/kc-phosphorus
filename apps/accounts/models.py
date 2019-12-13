@@ -15,6 +15,7 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
 
     bio = models.TextField()
+    phone = models.CharField(max_length=20, blank=True)
 
     def gravatar(self, size=None):
         GRAVATAR_URL = 'https://gravatar.com/avatar/%s?d=identicon%s'
