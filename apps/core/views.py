@@ -86,7 +86,3 @@ def about(request):
 
     return render(request, 'pages/about.html', context)
 
-def contact(request):
-    context = {}
-
-    return render(request, 'pages/contact.html', context)
