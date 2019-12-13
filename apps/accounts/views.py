@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from apps.accounts.forms import UserEditForm, SignupForm, NewLocationForm
-from apps.accounts.models import User
+from apps.accounts.models import User, Location
 
 # USER SETUP --------------------------------------------------------
 def log_in(request):
@@ -65,9 +65,13 @@ def view_profile(request, username):
     else:
         is_viewing_self = False
 
+    locations = Location.objects.order_by('-created')
+    user_locations = locations.filter(user=user)
+
     context = {
         'user': user,
         'is_viewing_self': is_viewing_self,
+        'locations': user_locations,
     }
     return render(request, 'accounts/profile_page.html', context)
 
@@ -87,17 +91,21 @@ def edit_profile(request):
     return render(request, 'accounts/edit_profile.html', context)
 
 # Add a Location ----------------------------------------------------------
-
+@login_required
 def add_location(request):
-    if request.method == 'POST':
-        form = NewLocationForm(request.POST)
-        if form.is_valid():
-            location = form.save()
+    # user = User.objects.get(username=username)
 
-            # Log-in the user right away
-            return redirect('home')
+    if request.method == 'POST':
+        form = NewLocationForm(request.POST, instance=request.user)
+        if form.is_valid():
+            location = form.save(commit=False)
+            location.user = request.user
+            location.save()
+
+            return redirect('/')
+
     else:
-        form = NewLocationForm()
+        form = NewLocationForm(instance=request.user)
 
     context = {
         'form': form,
