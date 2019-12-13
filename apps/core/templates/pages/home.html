@@ -11,11 +11,14 @@
           <header> PHOSPHORUS </header>
 
         <!-- different background video after user submits locations -->
-          <video autoplay muted loop id="myVideo">
+          <video autoplay muted loop id="myVideo2">
             <source src="/static/videos/sunset.mp4" type="video/mp4">
           </video>
 
           <!-- listing output infor from form results -->
+
+          <div class="row">
+            <div class="col" id="form" align="center">
 
             <p>Today's sunset: {{ local_sunset }}</p>
             <p>Today's sunrise: {{ local_sunrise }}</p>
@@ -23,44 +26,26 @@
 
             <p>Local AQI: {{ local_ip_aqi }} </p>
 
-              <!-- {% if int("local_ip_aqi") < 50 %}
-                <p> <em>"GOOD"</em>
-                <p> Good day to be outside. </p>
 
-              {% elif if int("local_ip_aqi") < 100 OR int("local_ip_aqi") == 51 %}
-                <p> <em>"MODERATE"</em>
-                <p>Sensitive individuals should consider limiting prolonged outdoor exertion. </p>
-
-              {% elif if int("local_ip_aqi") < 200 OR int("local_ip_aqi") == 151 %}
-                <p> <em>"UNHEALTHY FOR SENSITIVE GROUPS"</em>
-                <p>Limit prolonged outdoor exertion, and limit outdoor exposure for sensitive individuals. </p>
-
-              {% elif if int("local_ip_aqi") < 200 OR int("local_ip_aqi") == 151 %}
-                <p> <em>"UNHEALTHY"</em>
-                <p>Everyone should limit outdoor exertion. Preferably, not go outside. </p>
-
-              {% elif if int("local_ip_aqi") < 200 OR int("local_ip_aqi") == 151 %}
-                <p> <em>"VERY UNHEALTHY"</em>
-
-                  {% elif if int("local_ip_aqi") < 200 OR int("local_ip_aqi") == 151 %}
-                <p> <em>"HAZARDOUS"</em>
-                  <p> Stay inside!!</p>
- -->
-
-        {% endif %}
 
 
   {% else %}
 
+  <video autoplay muted loop id="myVideo">
+    <source src="/static/videos/landscape.mp4" type="video/mp4">
+  </video>
+
   <header> WHERE ARE YOU? </header>
 
-  <p> We'll let you know when the sun is going down. </p>
+
 
   <div class="row">
     <div class="col">
 
 
     <form id="form" class="topBefore" method="POST">
+      <p align="center"> We'll let you know when the sun is going down. </p>
+
       {% csrf_token %}
       {{ form.as_p }}
       <p>
