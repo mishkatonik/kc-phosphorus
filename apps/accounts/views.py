@@ -99,7 +99,9 @@ def add_location(request):
         form = NewLocationForm(request.POST, instance=request.user)
         if form.is_valid():
             location = form.save(commit=False)
+            print(location)
             location.user = request.user
+            print(location)
             location.save()
 
             return redirect('/')
