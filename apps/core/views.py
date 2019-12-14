@@ -6,7 +6,7 @@ import environment
 
 
 class PostCity(forms.Form):
-    city = forms.CharField(label='Enter City', max_length=50)
+    city = forms.CharField(label="ENTER A CITY", max_length=255)
 
 
 

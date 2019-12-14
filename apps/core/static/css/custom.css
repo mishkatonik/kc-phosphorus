@@ -20,7 +20,10 @@
 }
 
 #output {
-  opacity: 0.5;
+  background-color: #e2dedb;
+  opacity: 0.7;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 #myVideo {
@@ -73,11 +76,8 @@ a.prof-link {
 }
 
 #locations-box {
-/*  background: rgb(111,152,186);
-  background: linear-gradient(180deg, rgba(111,152,186,1) 0%, rgba(0,7,66,1) 100%);*/
   background-color: #e2dedb;
   opacity: 0.7;
-  /*border-radius: 10px;*/
   padding-top: 10px;
 }
 

@@ -22,16 +22,19 @@
 
               <div class="row">
                   <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-                      <div class="card card-signin my-5">
+                      <!-- <div class="card card-signin my-5"> -->
                           <div class="card-body">
-                              <form class="output">
-                                <p>Today's sunset: <br>{{ local_sunset }}</p>
-                                <p>Today's sunrise: <br>{{ local_sunrise }}</p>
-                                <p>Local Air Quality Index: {{ local_ip_aqi }} </p>
+                              <div id="output">
+                                <h4>Today's sunset:</h4>
+                                  <p>{{ local_sunset }}</p>
+                                <h4>Today's sunrise:</h4>
+                                  <p>{{ local_sunrise }}</p>
+                                <h4>Local Air Quality Index:</h4>
+                                  <p>{{ local_ip_aqi }} </p>
 
-                              </form>
+                              </div>
                           </div>
-                      </div>
+                      <!-- </div> -->
                   </div>
               </div>
 
@@ -41,7 +44,7 @@
     {% else %}
 
 
-      <header> WHERE ARE YOU? </header>
+      <header> PHOSPHORUS </header>
 
       <video autoplay muted loop id="myVideo">
         <source src="/static/videos/landscape.mp4" type="video/mp4">
