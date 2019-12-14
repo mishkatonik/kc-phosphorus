@@ -84,4 +84,3 @@ def about(request):
     context = {}
 
     return render(request, 'pages/about.html', context)
-
