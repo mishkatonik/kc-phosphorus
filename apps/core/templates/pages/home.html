@@ -20,11 +20,22 @@
           <div class="row">
             <div class="col" id="form2" align="center">
 
-            <p>Today's sunset: <br>{{ local_sunset }}</p>
-            <p>Today's next sunrise: <br>{{ local_sunrise }}</p>
+              <div class="row">
+                  <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+                      <div class="card card-signin my-5">
+                          <div class="card-body">
+                              <form class="output">
+                                <p>Today's sunset: <br>{{ local_sunset }}</p>
+                                <p>Today's next sunrise: <br>{{ local_sunrise }}</p>
+                                <p>Local Air Quality Index: {{ local_ip_aqi }} </p>
+
+                              </form>
+                          </div>
+                      </div>
+                  </div>
+              </div>
 
 
-            <p>Local Air Quality Index: {{ local_ip_aqi }} </p>
 
 
   {% else %}

@@ -33,6 +33,24 @@
 
 <body>
 
+  {% block main %}
+
+      <div class="container pt-2">
+
+        {# Enable Django's "messages" system #}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+          <p>Use this as a way to quick start any new project.</p>
+        {% endblock content %}
+
+      </div>
+  {% endblock main %}
+
 <nav class="navbar navbar-expand-md">
     <div class="container">
 
@@ -57,6 +75,8 @@
                 </li> -->
             </ul>
             <ul class="navbar-nav ml-auto">
+
+
                  {% if request.user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'logout' %}" >Sign Out</a>
@@ -76,29 +96,9 @@
                     </li>
                 {% endif %}
             </ul>
-
+          </div>
         </div>
     </nav>
-</div>
-
-
-
-{% block main %}
-    <div class="container pt-2">
-
-      {# Enable Django's "messages" system #}
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-      {% endif %}
-
-      {% block content %}
-        <p>Use this as a way to quick start any new project.</p>
-      {% endblock content %}
-
-    </div>
-{% endblock main %}
 
 
       <script src="{% static 'js/bootstrap/jquery-3.4.1.min.js' %}"></script>
