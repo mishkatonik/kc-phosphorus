@@ -1,11 +1,18 @@
 /* Custom CSS goes here */
 
+.navbar {
+
+}
+
 .nav-link {
-
   font-family: 'Lato', sans-serif;
-  background: #e2dedb;
-  color: #474442;
+  background: #636574;
+  color: #e2dedb;
+}
 
+.nav-link:hover {
+  background: #e2dedb;
+  color: #636574;
 }
 
 #output {
@@ -32,7 +39,7 @@
 }
 
 
-}
+
 
 /* CSS FOR SUBMISSION FORM */
 
