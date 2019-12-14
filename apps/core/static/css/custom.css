@@ -77,13 +77,10 @@ a.prof-link {
   background: linear-gradient(180deg, rgba(111,152,186,1) 0%, rgba(0,7,66,1) 100%);*/
   background-color: #e2dedb;
   opacity: 0.7;
-  border-radius: 10px;
+  /*border-radius: 10px;*/
+  padding-top: 10px;
 }
 
-.col-centered{
-    float: none;
-    margin: 0 auto;
-}
 
 /* CSS FOR SUBMISSION FORM */
 
