@@ -9,15 +9,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>
         {% block title %}
-            My Site
+            Phosphorus
         {% endblock title %}
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <script src="{% static 'js/bootstrap/jquery-3.4.1.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -36,27 +33,28 @@
 
 <body>
 
+  {% block main %}
 
-{% block main %}
-    <div class="container pt-2">
+      <div class="container pt-2">
 
-      {# Enable Django's "messages" system #}
-      {% if messages %}
-          {% for message in messages %}
-              <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
-          {% endfor %}
-      {% endif %}
+        {# Enable Django's "messages" system #}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
 
-      {% block content %}
-        <p>Use this as a way to quick start any new project.</p>
-      {% endblock content %}
+        {% block content %}
+          <p>Use this as a way to quick start any new project.</p>
+        {% endblock content %}
 
-    </div>
-{% endblock main %}
-
+      </div>
+  {% endblock main %}
 
 <nav class="navbar navbar-expand-md">
     <div class="container">
+
+            Welcome to Phosphorus
 
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon">
@@ -98,10 +96,12 @@
                     </li>
                 {% endif %}
             </ul>
+          </div>
         </div>
-        
-    </div>
-  </nav>
+    </nav>
 
+
+      <script src="{% static 'js/bootstrap/jquery-3.4.1.min.js' %}"></script>
+      <script src="{% static 'js/bootstrap/bootstrap.js' %}"></script>
   </body>
 </html>
