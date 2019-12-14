@@ -6,7 +6,7 @@ import environment
 
 
 class PostCity(forms.Form):
-    city = forms.CharField(label='Enter City', max_length=50)
+    city = forms.CharField(label="ENTER A CITY", max_length=255)
 
 
 
@@ -41,7 +41,6 @@ def get_location(request):
                 # print("Sunrise for", city, ":", local_sunrise)
                 # print(forecast)
                 local_ip_aqi = get_airquality(request)
-            
     else:
         form = PostCity()
 

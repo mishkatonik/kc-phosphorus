@@ -13,9 +13,6 @@ python-dateutil = "*"
 requests = "*"
 django-environ = "*"
 bootstrap4 = "*"
-debug-toolbar = "*"
-django-debug-toolbar = "*"
 
 [dev-packages]
-django-debug-toolbar = "*"
 pylint = "*"
