@@ -27,31 +27,29 @@
             <p>Local Air Quality Index: {{ local_ip_aqi }} </p>
 
 
-  {% else %}
+    {% else %}
 
 
-  <video autoplay muted loop id="myVideo">
-    <source src="/static/videos/landscape.mp4" type="video/mp4">
-  </video>
+      <header> WHERE ARE YOU? </header>
 
-  <header> WHERE ARE YOU? </header>
+      <video autoplay muted loop id="myVideo">
+        <source src="/static/videos/landscape.mp4" type="video/mp4">
+      </video>
 
-
-
-  <div class="row">
-    <div class="col">
+      <div class="row">
+        <div class="col">
 
 
-    <form id="form" class="topBefore" method="POST">
-      <p align="center"> We'll let you know when the sun goes down. </p>
+        <form id="form" class="topBefore" method="POST">
+          <p align="center"> We'll let you know when the sun goes down. </p>
 
-      {% csrf_token %}
-      {{ form.as_p }}
-      <p>
-      <input id="submit" type="submit" value="LET'S GO">
-    </form>
+          {% csrf_token %}
+          {{ form.as_p }}
 
-  {% endif %}
+          <input id="submit" type="submit" value="LET'S GO">
+        </form>
+
+    {% endif %}
 
 
   </div>
