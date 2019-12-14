@@ -65,7 +65,7 @@ def view_profile(request, username):
     else:
         is_viewing_self = False
 
-    locations = Location.objects.order_by('-created')
+    locations = Location.objects.order_by('created')
     user_locations = locations.filter(user=user)
 
     context = {
@@ -93,7 +93,7 @@ def edit_profile(request):
 # Add a Location ----------------------------------------------------------
 @login_required
 def add_location(request):
-    # user = User.objects.get(username=username)
+    # username = User.objects.get_username()
 
     if request.method == 'POST':
         form = NewLocationForm(request.POST, instance=request.user)
