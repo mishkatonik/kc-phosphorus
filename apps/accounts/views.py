@@ -77,11 +77,14 @@ def view_profile(request, username):
 
 @login_required
 def edit_profile(request):
+    user = request.user
+    username = user.get_username()
+
     if request.method == 'POST':
         form = UserEditForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('view_profile')
+            return redirect('view_profile', username=username)
     else:
         form = UserEditForm(instance=request.user)
 
@@ -93,17 +96,17 @@ def edit_profile(request):
 # Add a Location ----------------------------------------------------------
 @login_required
 def add_location(request):
-    # username = User.objects.get_username()
+    user = request.user
+    username = user.get_username()
 
     if request.method == 'POST':
         form = NewLocationForm(request.POST)
         if form.is_valid():
             location = form.save(commit=False)
             location.user = request.user
-            print(location)
             location.save()
 
-            return redirect('/')
+            return redirect('view_profile', username=username)
 
     else:
         form = NewLocationForm()

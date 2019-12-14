@@ -1,32 +1,46 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}
     @{{ user.username }}
 {% endblock title %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-3">
-        <img src="{{ user.gravatar }}" />
 
-        <h3>@{{ user.username }}</h3>
-        <p><strong>{{ user.first_name }} {{ user.last_name }}</strong></p>
-        <p>{{ user.bio }}</p>
+<video autoplay muted loop id="myVideo2">
+    <source src="/static/videos/sunset.mp4" type="video/mp4">
+</video>
 
-        {% if is_viewing_self %}
-            <a href="{% url "edit_profile" %}">Edit</a>
-            <a href="{% url "add_location" %}">Add Location</a>
-        {% endif %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <img id="gravatar" src="{{ user.gravatar }}" />
+
+            <h3>@{{ user.username }}</h3>
+            <p><strong>{{ user.first_name }} {{ user.last_name }}</strong></p>
+            <p>{{ user.bio }}</p>
+
+            {% if is_viewing_self %}
+                <button type="button" class="btn btn-secondary"><a class="prof-link" href="{% url "edit_profile" %}">Edit</a></button>
+                <button type="button" class="btn btn-secondary"><a class="prof-link" href="{% url "add_location" %}">Add Location</a></button>
+            {% endif %}
+        </div>
     </div>
 
-    <div class="col-md-9">
-        <h4>Locations</h4>
-        <ul>
-            {% for location in locations %}
-            <li>{{ location }}</li>
-            {% endfor %}
-        </ul>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h4>My Locations</h4>
+            
+                {% for location in locations %}
+                <p>{{ location }}</p>
+                {% endfor %}
+            
+        </div>
     </div>
+
 </div>
+
+
+
 {% endblock %}
 
