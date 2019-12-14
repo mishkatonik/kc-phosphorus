@@ -1,7 +1,11 @@
 /* Custom CSS goes here */
 
 .navbar {
-
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .nav-link {
