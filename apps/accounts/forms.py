@@ -23,6 +23,7 @@ class UserEditForm(forms.ModelForm):
             'last_name',
             'email',
             'bio',
+            'phone',
         )
 
 class SignupForm(UserCreationForm):
@@ -31,6 +32,7 @@ class SignupForm(UserCreationForm):
         fields = (
             'username',
             'email',
+            'phone',
             'password1',
             'password2',
         )
