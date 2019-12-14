@@ -96,10 +96,9 @@ def add_location(request):
     # username = User.objects.get_username()
 
     if request.method == 'POST':
-        form = NewLocationForm(request.POST, instance=request.user)
+        form = NewLocationForm(request.POST)
         if form.is_valid():
             location = form.save(commit=False)
-            print(location)
             location.user = request.user
             print(location)
             location.save()
@@ -107,7 +106,7 @@ def add_location(request):
             return redirect('/')
 
     else:
-        form = NewLocationForm(instance=request.user)
+        form = NewLocationForm()
 
     context = {
         'form': form,
