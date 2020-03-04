@@ -6,6 +6,9 @@ This app was created with python-django with PosGresQL as the backend server. It
 
 For prototype purposes only.
 
+## API
+IP-based air quality data was provided by [AirVisual API](https://api.airvisual.com/) and sunrise/sunset information by free service from [HereMaps](https://www.here.com/)
+
 ## Screenshot 
 
 ![Screen Shot 2020-03-01 at 8 12 43 PM](https://user-images.githubusercontent.com/40274451/75644960-107f8b80-5bf9-11ea-8e29-2341576f9b9b.png)
